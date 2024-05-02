@@ -1,6 +1,0 @@
-Username: user_100421
-Password: 2323
-Account No.: 100421
-first name: user
-last name: user
------------------------------------------------------------------

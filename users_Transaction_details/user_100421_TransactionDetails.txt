@@ -1,5 +1,0 @@
-user name: user_100421
-first name: user
-last name: user
-Now balance: 0Da
------------------------------------------------------------------

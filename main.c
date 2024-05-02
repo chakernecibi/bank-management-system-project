@@ -8,6 +8,7 @@
 #define DETAILS_FOLDER_PATH "users_details"
 #define TRANSACTION_DETAILS_FOLDER_PATH "users_Transaction_details"
 #define DETAILS_FOLDER_PATH_FOR_ADMIN "admin"
+#define REQUEST_REGESTRANTION_FOLDER_PATH "admin/request_regestration"
 
 
 typedef struct {
@@ -20,6 +21,7 @@ typedef struct {
     int amt;
     char detailsFilePath[200];
     char TransactiondetailsFilePath[200];
+    char reauest_regestrationFilePath[200];
 } Account;
 
 void divider() {
@@ -335,8 +337,9 @@ int getID() {
 
 
 
-int registerAccount(Account *account) {
+int registerAccount(char first_Name[20] , char Last_Name[20] , char Pass[25]) {
     system("cls");
+    Account account;
      char Accounts[200];
      sprintf(Accounts, "%s/Accounts.txt", DETAILS_FOLDER_PATH_FOR_ADMIN);
     FILE *acc_ptr = fopen(Accounts, "a+");
@@ -346,30 +349,37 @@ int registerAccount(Account *account) {
         exit(1);
     }
 
-   printf("Enter your first name: ");
-    scanf("%s", account->firstname);
+char firstname[20];
+char name[20];
+char password[25];
 
-    printf("Enter a password: ");
-    scanf("%s", account->password);
-    printf("Enter your last name: ");
-    scanf("%s", account->name);
-    account->id = getID();
-    account->acc_no = generateRandom();
-    account->amt = 0;
-    sprintf(account->username, "%s_%d", account->firstname, account->acc_no);
+strcpy(firstname, first_Name);
+strcpy(name, Last_Name);
+strcpy(password, Pass);
 
-        sprintf(account->detailsFilePath, "%s/%s_Details.txt", DETAILS_FOLDER_PATH, account->username);
+    int id = getID();
+    int acc_no = generateRandom();
+    int amt = 0;
+    char username[20];
+    sprintf(username, "%s_%d", firstname, acc_no);
+
+          char detailsFilePath[200];
+        sprintf(detailsFilePath, "%s/%s_Details.txt", DETAILS_FOLDER_PATH, username);
         
-        FILE *detailsFile = fopen(account->detailsFilePath, "w");
+        FILE *detailsFile = fopen(detailsFilePath, "w");
+
+       
 
     if (detailsFile == NULL) {
         printf("Error creating the details file.\n");
         exit(1);
     }
 
-        sprintf(account->TransactiondetailsFilePath, "%s/%s_TransactionDetails.txt", TRANSACTION_DETAILS_FOLDER_PATH, account->username);
+    char TransactiondetailsFilePath[200];
 
-        FILE *TransactionDetailsfile = fopen(account->TransactiondetailsFilePath, "w");
+        sprintf(TransactiondetailsFilePath, "%s/%s_TransactionDetails.txt", TRANSACTION_DETAILS_FOLDER_PATH,username);
+
+        FILE *TransactionDetailsfile = fopen(TransactiondetailsFilePath, "w");
 
     if (TransactionDetailsfile == NULL) {
         printf("Error creating the details file.\n");
@@ -378,28 +388,28 @@ int registerAccount(Account *account) {
 
     
 
-    fprintf(acc_ptr, "\nUsername: %s\n", account->username);
-    fprintf(acc_ptr, "first Name: %s\n", account->firstname);
-    fprintf(acc_ptr, "Last Name: %s\n", account->name);
-    fprintf(acc_ptr, "Account No.: %d\n", account->acc_no);
-    fprintf(acc_ptr, "ID: %d\n", account->id);
+    fprintf(acc_ptr, "\nUsername: %s\n", username);
+    fprintf(acc_ptr, "first Name: %s\n", firstname);
+    fprintf(acc_ptr, "Last Name: %s\n", name);
+    fprintf(acc_ptr, "Account No.: %d\n", acc_no);
+    fprintf(acc_ptr, "ID: %d\n", id);
     fprintf(acc_ptr, "-----------------------------------------------------------------\n");
 
     
 
    
 
-    fprintf(detailsFile, "Username: %s\n", account->username);
-    fprintf(detailsFile, "Password: %s\n", account->password);
-    fprintf(detailsFile, "Account No.: %d\n", account->acc_no);
-    fprintf(detailsFile, "first name: %s\n", account->firstname);
-    fprintf(detailsFile, "last name: %s\n", account->name);
+    fprintf(detailsFile, "Username: %s\n",username);
+    fprintf(detailsFile, "Password: %s\n",password);
+    fprintf(detailsFile, "Account No.: %d\n",acc_no);
+    fprintf(detailsFile, "first name: %s\n",firstname);
+    fprintf(detailsFile, "last name: %s\n",name);
     fprintf(detailsFile, "-----------------------------------------------------------------\n");
 
-        fprintf(TransactionDetailsfile, "user name: %s\n", account->username);
-        fprintf(TransactionDetailsfile, "first name: %s\n", account->firstname);
-        fprintf(TransactionDetailsfile, "last name: %s\n", account->name);
-        fprintf(TransactionDetailsfile, "Now balance: %dDa\n", account->amt);
+        fprintf(TransactionDetailsfile, "user name: %s\n",username);
+        fprintf(TransactionDetailsfile, "first name: %s\n", firstname);
+        fprintf(TransactionDetailsfile, "last name: %s\n", name);
+        fprintf(TransactionDetailsfile, "Now balance: %dDa\n", amt);
         fprintf(TransactionDetailsfile, "-----------------------------------------------------------------\n");
 
 
@@ -412,9 +422,125 @@ int registerAccount(Account *account) {
 
     printf("\n\nPress any key to exit.....");
         getch();
+        adminInterface();
+
+}
+
+int request_regestration(Account *account) {
+
+    char firstname[20];
+    char name[20];
+    char password[25];
+
+   system("cls");
+   printf("Enter your first name: ");
+    scanf("%s", firstname);
+    printf("Enter your last name: ");
+    scanf("%s", name);
+    printf("Enter a password: ");
+    scanf("%s", password);
 
 
-    return 0;
+    char reauest_regestrationFilePath[200];
+    sprintf(reauest_regestrationFilePath, "%s/request_regestration.txt", REQUEST_REGESTRANTION_FOLDER_PATH);
+
+     FILE *request_regestration = fopen(reauest_regestrationFilePath, "a+");
+
+    fprintf(request_regestration, "\nfirst Name: %s\n", firstname);
+    fprintf(request_regestration, "Last Name: %s\n", name);
+    fprintf(request_regestration, "Password: %s\n", password);
+    fprintf(request_regestration, "-----------------------------------------------------------------\n");
+
+    
+     fclose(request_regestration);
+
+     printf("\nYour regestration request is done wait until admin accept it.\n");
+
+    printf("\n\nPress any key to exit.....");
+
+        getch();
+
+    
+}
+
+int addAccount(){
+    start:
+    system("cls");
+    char temp[200];
+    char Accounts[200];
+    sprintf(temp, "%s/temp.txt", REQUEST_REGESTRANTION_FOLDER_PATH);
+    sprintf(Accounts, "%s/request_regestration.txt", REQUEST_REGESTRANTION_FOLDER_PATH);
+
+    FILE *ptr = fopen(Accounts, "r");
+    if (ptr == NULL) {
+        printf("Error opening the file.\n");
+        exit(1);
+    }
+
+
+    FILE *tempFile = fopen(temp, "w");
+    if (tempFile == NULL) {
+        printf("Error opening the file.\n");
+        exit(1);
+    }
+
+    displayAllRequastes();
+
+    printf("\nEnter the request name that you want to add: ");
+    char username[20];
+    scanf("%s", username);
+
+    fseek(ptr, 0, SEEK_SET);
+    char line[100];
+    int found = 0;
+    char l_name[20];
+    char pass[25];
+
+    while (fgets(line, sizeof(line), ptr)) {
+        if (strstr(line, "first Name:") != NULL && strstr(line + 10, username) != NULL) {
+            int choice;
+            printf("\n whould you want to add this account %s press (1/0) : ",username);
+            scanf("%d", &choice);
+            if( choice == 1){
+                found = 1;
+            sscanf(line, "first Name: %s", &username);
+            fgets(line, sizeof(line), ptr);
+            sscanf(line, "Last Name: %s", &l_name);
+            fgets(line, sizeof(line), ptr);
+            sscanf(line, "Password: %s", &pass);
+            fgets(line, sizeof(line), ptr);
+
+
+            }
+            else {
+                printf("\n\nPress any key to exit.....");
+                  getch();
+            }
+            
+        } else {
+            fputs(line, tempFile);
+        }
+    }
+
+      fclose(ptr);
+      fclose(tempFile);
+    
+    if (!found) {
+        remove(temp);  
+        printf("Username %s not found.\n", username);
+        printf("\n\nPress any key to try again.....");
+                  getch();
+                  goto start;
+    } else {
+        
+        remove(Accounts);
+        rename(temp, Accounts);
+        registerAccount(username,l_name,pass);
+
+    }
+
+
+   
 }
 
 
@@ -432,8 +558,11 @@ int login(Account *account) {
     printf("\n");
     scanf("%d", &choice);
 
+    
     if (choice == 1) {
         system("cls");
+    
+
     printf("Enter your username: ");
     scanf("%s", account->username);
 
@@ -467,7 +596,7 @@ int login(Account *account) {
             } else {
                 printf("Incorrect password.\n");
                 fclose(acc_dt_ptr);
-                return 1; // Incorrect password
+                return 1; 
             }
         }
     }
@@ -475,23 +604,22 @@ int login(Account *account) {
     fclose(acc_dt_ptr);
 
     if (!found) {
+        remove(acc_dt_ptr);
         printf("Username not found. Do you want to register a new account? (1/0): ");
         int choice;
         scanf("%d", &choice);
         if (choice == 1) {
-            registerAccount(account);
-            return 0;
+            request_regestration(account);
         } else {
             return 1;
         }
     }
 
-    return 1; // Username not found
+    return 1; 
 
     } else if (choice == 2) {
-
-        return registerAccount(account);
-
+         request_regestration(account);
+         return 2;
     } 
     
     else if (choice == 3) {
@@ -502,7 +630,7 @@ int login(Account *account) {
 
         printf("\n\nPress any key to exit.....");
         getch();
-        return 1; // Exiting
+        exit(0);
 
     } 
     
@@ -513,7 +641,7 @@ int login(Account *account) {
 
     }
 
-    return 1; 
+
 }
 
 
@@ -671,6 +799,26 @@ void displayAllAccounts() {
         getch();
 }
 
+void displayAllRequastes() {
+    system("cls");
+     char requests[200];
+     sprintf(requests, "%s/request_regestration.txt", REQUEST_REGESTRANTION_FOLDER_PATH);
+    FILE *ptr = fopen(requests, "r");
+    if (ptr == NULL) {
+        printf("Error opening the file.\n");
+        exit(1);
+    }
+
+    char c;
+    while ((c = fgetc(ptr)) != EOF) {
+        printf("%c", c);
+    }
+
+    fclose(ptr);
+    printf("\n\nPress any key to continue.....");
+        getch();
+}
+
 int authenticateAdmin() {
 
 
@@ -711,7 +859,9 @@ int authenticateAdmin() {
 }
 
 int adminInterface() {
+    start:
     system("cls");
+    Account account;
     int adminChoice;
     if(authenticateAdmin() == 1){
 
@@ -725,8 +875,9 @@ int adminInterface() {
         printf("\n");
         printf("1. Display all accounts\n");
         printf("2. Delete an account\n");
-        printf("3. Logging out\n");   
-        printf("3. Exit\n");             
+        printf("3. Add an account\n");
+        printf("4. Logging out\n");   
+        printf("5. Exit\n");             
         divider();
         printf("\nEnter your choice: ");
         scanf("%d", &adminChoice);
@@ -739,10 +890,13 @@ int adminInterface() {
                 deleteAccount();
                 break;
             case 3:
+                addAccount(account);
+                break;
+            case 4:
                 printf("Logging out...\n");
                 return 1;
                 break;
-            case 4:
+            case 5:
             printf("\n\nPress any key to exit.....");
               getch();
             default:
@@ -754,8 +908,9 @@ int adminInterface() {
     }
     else{
         printf("Authentication failed. Exiting...\n");
-        printf("\n\nPress any key to exit.....");
+        printf("\n\nPress any key to try again.....");
         getch();
+        goto start;
     }
 
     return 0;

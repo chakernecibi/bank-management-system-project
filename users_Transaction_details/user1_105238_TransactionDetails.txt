@@ -1,0 +1,40 @@
+user name: user1_105238
+first name: user1
+last name: user1
+Now balance: 0Da
+-----------------------------------------------------------------
+
+first name: user1
+last name: user1
+Now balance: 3000Da
+
+ 3000 Da had been deposited to your account 
+Date/Time of transaction: Thu May 02 05:21:16 2024
+
+-----------------------------------------------------------------
+
+first name: user1
+last name: user1
+Now balance: 43000Da
+
+ 40000 Da had been deposited to your account 
+Date/Time of transaction: Thu May 02 05:21:31 2024
+
+-----------------------------------------------------------------
+
+first name: user1
+last name: user1
+Now balance: 23000Da
+
+20000Da had been withdrawn from your account 
+Date/Time of transaction: Thu May 02 05:21:40 2024
+
+-----------------------------------------------------------------
+name: user1_105238
+last name: user1
+Now balance: 20000Da
+
+3000 Da had been transferred from your account to user2_107001
+Date/Time of transaction: Thu May 02 05:22:32 2024
+
+-----------------------------------------------------------------

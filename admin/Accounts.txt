@@ -1,27 +1,14 @@
 
------Account Deleted-----
+Username: user1_105238
+first Name: user1
+Last Name: user1
+Account No.: 105238
 ID: 0
 -----------------------------------------------------------------
 
------Account Deleted-----
+Username: user2_107001
+first Name: user2
+Last Name: user2
+Account No.: 107001
 ID: 1
------------------------------------------------------------------
-
------Account Deleted-----
-ID: 2
------------------------------------------------------------------
-
-
-Username: user_100330
-first Name: user
-Last Name: user
-Account No.: 100330
-ID: 3
------------------------------------------------------------------
-
-Username: user_100421
-first Name: user
-Last Name: user
-Account No.: 100421
-ID: 4
 -----------------------------------------------------------------

@@ -1,0 +1,12 @@
+user name: user2_107001
+first name: user2
+last name: user2
+Now balance: 0Da
+-----------------------------------------------------------------
+
+Now balance: 3000Da
+
+3000 Da had been transferred from user1_105238 to your account.
+Date/Time of transaction: Thu May 02 05:22:32 2024
+
+-----------------------------------------------------------------
